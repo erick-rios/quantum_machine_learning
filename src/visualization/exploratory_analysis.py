@@ -4,11 +4,21 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Definir el directorio donde están las imágenes
-data_dir = '../data/dogs_vs_cats/test/'  # Cambia a la ruta exacta si es diferente
-categories = ['dogs']  # Puedes añadir otras categorías si tienes más
+data_dir = '../data/dogs_vs_cats/test/'  
+categories = ['dogs']  
 
-# Crear una función para cargar las imágenes y visualizar algunas aleatoriamente
+
 def load_images(data_dir, categories, num_samples=5):
+    """Load images from a directory and return the data and labels as numpy arrays
+
+    Args:
+        data_dir (_type_): Path to the directory containing the images
+        categories (_type_): List of categories to load
+        num_samples (int, optional): Samples to show  . Defaults to 5.
+
+    Returns:
+        _type_: _description_
+    """
     image_data = []
     image_labels = []
 
@@ -30,16 +40,23 @@ image_data, image_labels = load_images(data_dir, categories)
 image_data_cat, image_labels_cat = load_images(data_dir,['cats']) 
 # Visualizar algunas imágenes de cada categoría
 def show_sample_images(image_data, image_labels, categories, num_samples=5):
+    """Display sample images from each category
+
+    Args:
+        image_data (_type_): _description_
+        image_labels (_type_): _description_
+        categories (_type_): _description_
+        num_samples (int, optional): _description_. Defaults to 5.
+    """
     fig, axes = plt.subplots(len(categories), num_samples, figsize=(15, 5))
 
-    # Asegurarse de que 'axes' sea una lista bidimensional
+    
     if len(categories) == 1:
-        axes = [axes]  # Convertir a una lista de una fila si hay solo una categoría
+        axes = [axes] 
 
     for i, category in enumerate(categories):
         category_images = [img for img, label in zip(image_data, image_labels) if label == category]
         
-        # Manejar el caso cuando hay menos imágenes que 'num_samples'
         num_to_show = min(num_samples, len(category_images))
         
         for j in range(num_to_show):
@@ -50,8 +67,13 @@ def show_sample_images(image_data, image_labels, categories, num_samples=5):
 
 show_sample_images(image_data, image_labels, categories)
 show_sample_images(image_data_cat, image_labels_cat, ['cats'])
-# Calcular dimensiones promedio de las imágenes
+
 def calculate_image_stats(image_data):
+    """Calculate the average width and height of the images
+
+    Args:
+        image_data (_type_): _description_
+    """
     widths, heights = zip(*(img.shape[:2] for img in image_data))
     avg_width, avg_height = np.mean(widths), np.mean(heights)
     print(f"Average width: {avg_width:.2f}, Average height: {avg_height:.2f}")
