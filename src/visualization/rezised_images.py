@@ -2,13 +2,22 @@ import os
 from PIL import Image
 import numpy as np
 
-# Definir el directorio donde están las imágenes
-data_dir = '../data/'  # Cambia a la ruta exacta si es diferente
-output_dir = '../data/resized_images'  # Carpeta de salida para las imágenes redimensionadas
-categories = ['dogs', 'cats']  # Añade más categorías si tienes otras
 
-# Función para calcular dimensiones promedio
+data_dir = '../data/'  
+output_dir = '../data/resized_images'  
+categories = ['dogs', 'cats']  
+
+
 def calculate_average_dimensions(data_dir, categories):
+    """Calculate the average dimensions of images in a directory
+
+    Args:
+        data_dir (_type_): _description_
+        categories (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     widths, heights = [], []
 
     for category in categories:
@@ -27,14 +36,22 @@ def calculate_average_dimensions(data_dir, categories):
     print(f"Average dimensions: {avg_width}x{avg_height}")
     return avg_width, avg_height
 
-# Llamar a la función para calcular las dimensiones promedio
+
 avg_width, avg_height = calculate_average_dimensions(data_dir, categories)
 
-# Escoge el tamaño final para todas las imágenes (se recomienda 64x64 o 128x128)
+
 target_size = (64, 64)
 
-# Crear una función para redimensionar y guardar imágenes
+
 def resize_and_save_images(data_dir, output_dir, categories, target_size):
+    """Resize images in a directory and save them to a new directory
+
+    Args:
+        data_dir (_type_): _description_
+        output_dir (_type_): _description_
+        categories (_type_): _description_
+        target_size (_type_): _description_
+    """
     os.makedirs(output_dir, exist_ok=True)
     
     for category in categories:
@@ -51,6 +68,6 @@ def resize_and_save_images(data_dir, output_dir, categories, target_size):
             except Exception as e:
                 print(f"Error resizing image {img_path}: {e}")
 
-# Redimensionar y guardar las imágenes
+
 resize_and_save_images(data_dir, output_dir, categories, target_size)
 print(f"Images have been resized and saved to '{output_dir}' with target size {target_size}")
