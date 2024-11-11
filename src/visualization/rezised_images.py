@@ -3,9 +3,9 @@ from PIL import Image
 import numpy as np
 
 # Definir el directorio donde están las imágenes
-data_dir = '../data/dogs_vs_cats'  # Cambia a la ruta exacta si es diferente
-output_dir = 'resized_images'  # Carpeta de salida para las imágenes redimensionadas
-categories = ['dog']  # Añade más categorías si tienes otras
+data_dir = '../data/'  # Cambia a la ruta exacta si es diferente
+output_dir = '../data/resized_images'  # Carpeta de salida para las imágenes redimensionadas
+categories = ['dogs', 'cats']  # Añade más categorías si tienes otras
 
 # Función para calcular dimensiones promedio
 def calculate_average_dimensions(data_dir, categories):
